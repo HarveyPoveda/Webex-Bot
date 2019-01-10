@@ -1,5 +1,3 @@
-# Python ChatBot Basic Script for demo to Intergrate with Cisco Spark
-
 # Python ChatBowith webex team with smartsheet API
 
 ### References : 
