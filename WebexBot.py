@@ -30,7 +30,7 @@ def get_tasks():
 def sendMessage(message,  toPersonEmail):
     cisco="""
 .:|:.:|:. CISCO"""
-    payload = {"roomId": room_id, "text": message+cisco}
+    payload = {"roomId": room_id, "text": message+"\n\n"cisco}
     response = requests.post("https://api.ciscospark.com/v1/messages/", data=json.dumps(payload),  headers=headers)
     return response.status_code
     
