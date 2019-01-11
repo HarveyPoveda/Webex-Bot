@@ -43,8 +43,7 @@ def replyForMessages(response):
         if 'hola' in responseMessage:
             messageString = """Hola, En que te puedo ayudar?
 1. Total de requerimientos atendidos
-2. Total de requerimientos de planeación
-"""
+2. Total de requerimientos de planeación"""
             sendMessage(messageString,  toPersonEmail)
         elif "1".lower() in responseMessage.lower():
             ss_client = smartsheet.Smartsheet(authetication_sheet)
@@ -66,9 +65,8 @@ def replyForMessages(response):
         else:
             messageString = """Lo siento, no entiendo la pregunta, pero te puedo ayudar con:
             
-            1. Total de requerimientos atendidos
-            2. Total de requerimientos de planeación
-            """
+1. Total de requerimientos atendidos
+2. Total de requerimientos de planeación"""
             sendMessage(messageString, toPersonEmail)
 
 if __name__ == "__main__":
