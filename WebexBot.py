@@ -41,8 +41,7 @@ def replyForMessages(response):
     print (responseMessage)
     if toPersonEmail != botEmail:
         if 'hola' in responseMessage:
-            messageString = """
-Hola, En que te puedo ayudar?
+            messageString = """Hola, En que te puedo ayudar?
 1. Total de requerimientos atendidos
 2. Total de requerimientos de planeación
 """
@@ -65,7 +64,11 @@ Hola, En que te puedo ayudar?
             #messageString = "it is " + datetime.now().strftime('%A %d %B %Y') + " today."
             sendMessage(messageString,  toPersonEmail)
         else:
-            messageString = 'Sorry! I was not programmed to answer this question!'
+            messageString = """Lo siento, no entiendo la pregunta, pero te puedo ayudar con:
+            
+            1. Total de requerimientos atendidos
+            2. Total de requerimientos de planeación
+            """
             sendMessage(messageString, toPersonEmail)
 
 if __name__ == "__main__":
