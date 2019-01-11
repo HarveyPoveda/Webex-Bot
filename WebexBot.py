@@ -28,7 +28,9 @@ def get_tasks():
 
 #A function to send the message by particular email of the receiver
 def sendMessage(message,  toPersonEmail):
-    payload = {"roomId": room_id, "text": message}
+    cisco="""
+.:|:.:|:. CISCO"""
+    payload = {"roomId": room_id, "text": message+cisco}
     response = requests.post("https://api.ciscospark.com/v1/messages/", data=json.dumps(payload),  headers=headers)
     return response.status_code
     
