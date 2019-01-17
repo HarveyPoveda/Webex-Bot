@@ -18,7 +18,7 @@ accessToken = os.environ['TOKEN']
 host = "https://api.ciscospark.com/v1"
 headers = {"Authorization": "Bearer %s" % accessToken,"Content-Type": "application/json"}
 authetication_sheet=os.environ['autheticationsheet']
-
+bandera=0
 
 
 @app.route('/', methods=['POST'])
