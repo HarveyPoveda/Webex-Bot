@@ -98,7 +98,7 @@ def Answer(message_request, room_id):
                 #response = ss_client.Cells.get_cell_history(sheet_id, row_id, columnId, include_all=True)
                 # print(json.loads(str(response)))
                 messageString = "Ingrese el requerimiento a buscar"
-                bandera=3
+                bandera=4
 
                 # messageString = "it is " + datetime.now().strftime('%A %d %B %Y') + " today."
                 sendMessage(messageString, room_id)
