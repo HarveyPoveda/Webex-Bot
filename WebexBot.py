@@ -34,9 +34,9 @@ def getMessage():
 
 #
 def sendMessage(message, room_id):
-    cisco = """
+    cisco = "\nInformación al día de hoy: " + datetime.now().strftime("%c") + "\n" + """
 .:|:.:|:. CISCO"""
-    payload = {"roomId": room_id, "text": message + "\n\n" + cisco}
+    payload = {"roomId": room_id, "text": message  + cisco}
     requests.post(host+"/messages/", data=json.dumps(payload), headers=headers)
 
 
@@ -64,7 +64,7 @@ def Answer(message_request, room_id):
                 response = ss_client.Cells.get_cell_history(sheet_id, row_id, columnId, include_all=True)
                 # print(json.loads(str(response)))
                 messageString = "El total de requerimientos atendidos es de: " + json.loads(str(response))["data"][0][
-                    'displayValue'] + "\nal día de hoy: " + datetime.now().strftime('%A %d %B %Y')
+                    'displayValue']
 
                 # messageString = "it is " + datetime.now().strftime('%A %d %B %Y') + " today."
                 sendMessage(messageString, room_id)
@@ -76,9 +76,8 @@ def Answer(message_request, room_id):
                 response = ss_client.Cells.get_cell_history(sheet_id, row_id, columnId, include_all=True)
                 # print(json.loads(str(response)))
                 messageString = "El total de requerimientos atendidos es de: " + json.loads(str(response))["data"][0][
-                    'displayValue'] + "\nal día de hoy: " + datetime.now().strftime('%A %d %B %Y')
+                    'displayValue']
 
-                # messageString = "it is " + datetime.now().strftime('%A %d %B %Y') + " today."
                 sendMessage(messageString, room_id)
             elif "3" in message.lower():
                 ss_client = smartsheet.Smartsheet(authetication_sheet)
@@ -88,19 +87,21 @@ def Answer(message_request, room_id):
                 response = ss_client.Cells.get_cell_history(sheet_id, row_id, columnId, include_all=True)
                 # print(json.loads(str(response)))
                 messageString = "El total de requerimientos atendidos es de: " + json.loads(str(response))["data"][0][
-                    'displayValue'] + "\nal día de hoy: " + datetime.now().strftime('%A %d %B %Y')
-
-                # messageString = "it is " + datetime.now().strftime('%A %d %B %Y') + " today."
+                    'displayValue']
                 sendMessage(messageString, room_id)
             elif "4" in message.lower():
-                ss_client = smartsheet.Smartsheet(authetication_sheet)
-                #row_id = 7005051021485956
-                #response = ss_client.Cells.get_cell_history(sheet_id, row_id, columnId, include_all=True)
-                # print(json.loads(str(response)))
                 messageString = "Ingrese el requerimiento a buscar"
                 bandera=4
-
-                # messageString = "it is " + datetime.now().strftime('%A %d %B %Y') + " today."
+                sendMessage(messageString, room_id)
+            elif "5" in message.lower():
+                ss_client = smartsheet.Smartsheet(authetication_sheet)
+                sheet_id = 6404892530108292
+                columnId = 1522017586440068
+                row_id = 7005051021485956
+                response = ss_client.Cells.get_cell_history(sheet_id, row_id, columnId, include_all=True)
+                # print(json.loads(str(response)))
+                messageString = "El total de requerimientos atendidos es de: " + json.loads(str(response))["data"][0][
+                    'displayValue']
                 sendMessage(messageString, room_id)
             else:
                 ans="Lo siento, no entiendo tu petición\n"+menu()
@@ -122,16 +123,16 @@ def Answer(message_request, room_id):
             response = ss_client.Cells.get_cell_history(sheet_id, row_id, columnId_id, include_all=True)
             messageString = "Id: " + json.loads(str(response))["data"][0]['displayValue'] + "\n"
             response = ss_client.Cells.get_cell_history(sheet_id, row_id, columnId_Asunto, include_all=True)
-            messageString = "Asunto: " + json.loads(str(response))["data"][0]['displayValue'] + "\n"
+            messageString += "Asunto: " + json.loads(str(response))["data"][0]['displayValue'] + "\n"
             response = ss_client.Cells.get_cell_history(sheet_id, row_id, columnId_Solicitud, include_all=True)
-            messageString = "Tipo de solicitud: " + json.loads(str(response))["data"][0]['displayValue'] + "\n"
+            messageString += "Tipo de solicitud: " + json.loads(str(response))["data"][0]['displayValue'] + "\n"
             response = ss_client.Cells.get_cell_history(sheet_id, row_id, columnId_Estado, include_all=True)
             messageString+="Estado: " + json.loads(str(response))["data"][0]['displayValue']+ "\n"
             response = ss_client.Cells.get_cell_history(sheet_id, row_id, columnId_esfuerzo, include_all=True)
-            messageString = "Tiempo de Esfuerzo (min): " + json.loads(str(response))["data"][0]['displayValue'] + "\n"
+            messageString += "Tiempo de Esfuerzo (min): " + json.loads(str(response))["data"][0]['displayValue'] + "\n"
             response = ss_client.Cells.get_cell_history(sheet_id, row_id, columnId_propietario, include_all=True)
-            messageString = "Propietario: " + json.loads(str(response))["data"][0]['displayValue'] + "\n"
-            messageString+="\nal día de hoy: " +datetime.now().strftime('%A %d %B %Y')
+            messageString += "Propietario: " + json.loads(str(response))["data"][0]['displayValue'] + "\n"
+            messageString+="\nal día de hoy: " +datetime.now().strftime('%c')
             sendMessage(messageString, room_id)
             #print(result)
 
