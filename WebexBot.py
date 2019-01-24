@@ -112,12 +112,25 @@ def Answer(message_request, room_id):
             response = ss_client.Search.search(message)
             row_id=json.loads(str(response))["results"][0]["objectId"]
             #columnId_requerimiento = 8796249076852612 # id de requerimiento
+            columnId_id = 8796249076852612
             columnId_Asunto = 4292649449482116
+            columnId_Solicitud = 1724276186343300
             columnId_Estado = 4714861914548100
+            columnId_esfuerzo = 3993496387381124
+            columnId_propietario = 4547598708172676
+
+            response = ss_client.Cells.get_cell_history(sheet_id, row_id, columnId_id, include_all=True)
+            messageString = "Id: " + json.loads(str(response))["data"][0]['displayValue'] + "\n"
             response = ss_client.Cells.get_cell_history(sheet_id, row_id, columnId_Asunto, include_all=True)
             messageString = "Asunto: " + json.loads(str(response))["data"][0]['displayValue'] + "\n"
+            response = ss_client.Cells.get_cell_history(sheet_id, row_id, columnId_Solicitud, include_all=True)
+            messageString = "Tipo de solicitud: " + json.loads(str(response))["data"][0]['displayValue'] + "\n"
             response = ss_client.Cells.get_cell_history(sheet_id, row_id, columnId_Estado, include_all=True)
             messageString+="Estado: " + json.loads(str(response))["data"][0]['displayValue']+ "\n"
+            response = ss_client.Cells.get_cell_history(sheet_id, row_id, columnId_esfuerzo, include_all=True)
+            messageString = "Tiempo de Esfuerzo (min): " + json.loads(str(response))["data"][0]['displayValue'] + "\n"
+            response = ss_client.Cells.get_cell_history(sheet_id, row_id, columnId_propietario, include_all=True)
+            messageString = "Propietario: " + json.loads(str(response))["data"][0]['displayValue'] + "\n"
             messageString+="\nal día de hoy: " +datetime.now().strftime('%A %d %B %Y')
             sendMessage(messageString, room_id)
             #print(result)
