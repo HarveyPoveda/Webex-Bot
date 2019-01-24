@@ -34,7 +34,7 @@ def getMessage():
 
 #
 def sendMessage(message, room_id):
-    cisco = "\n\n\nInformación al día de hoy: " + datetime.now().strftime("%c") + "\n" + ".:|:.:|:. CISCO"
+    cisco = "\n\nInformación al día de hoy: " + datetime.now().strftime("%c") + "\n" + ".:|:.:|:. CISCO"
     payload = {"roomId": room_id, "text": message  + cisco}
     requests.post(host+"/messages/", data=json.dumps(payload), headers=headers)
 
@@ -104,8 +104,8 @@ def Answer(message_request, room_id):
                 messageString = "El ingeniero en turno remoto es: " + json.loads(str(response))["data"][0][
                     'displayValue']+"\n"
                 response = ss_client.Cells.get_cell_history(sheet_id, row_id, columnNocturno, include_all=True)
-                messageString += "El ingeniero en turno nocturno: " + json.loads(str(response))["data"][0][
-                    'displayValue']+"\n"
+                messageString += "El ingeniero en turno nocturno es: " + json.loads(str(response))["data"][0][
+                    'displayValue']
                 sendMessage(messageString, room_id)
             else:
                 ans="Lo siento, no entiendo tu petición\n"+menu()
@@ -140,7 +140,7 @@ def Answer(message_request, room_id):
                 messageString += "Propietario: " + json.loads(str(response))["data"][0]['displayValue'] + "\n"
                 sendMessage(messageString, room_id)
             except:
-                messageString += "No se encontró ID\n"
+                messageString = "No se encontró ID\n"
                 sendMessage(messageString, room_id)
 
 
@@ -150,7 +150,7 @@ def menu():
 2. Total de requerimientos de ejecución.
 3. Total de requerimientos de planeación.
 4. Buscar Caso.
-5. rotación BO"""
+5. Rotación BO"""
 
 
     return messageString
