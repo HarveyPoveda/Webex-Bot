@@ -34,7 +34,7 @@ def getMessage():
 
 #
 def sendMessage(message, room_id):
-    cisco = "\n\nInformación al día de hoy: " + datetime.now().strftime("%c") + "\n" + ".:|:.:|:. CISCO"
+    cisco = "\n\nInformación al día de hoy: " + (datetime.datetime.utcnow() + datetime.timedelta(hours=-5)).strftime("%c") + "\n" + ".:|:.:|:. CISCO"
     payload = {"roomId": room_id, "text": message  + cisco}
     requests.post(host+"/messages/", data=json.dumps(payload), headers=headers)
 
