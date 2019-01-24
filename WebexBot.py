@@ -34,8 +34,7 @@ def getMessage():
 
 #
 def sendMessage(message, room_id):
-    cisco = "\nInformación al día de hoy: " + datetime.now().strftime("%c") + "\n" + """
-.:|:.:|:. CISCO"""
+    cisco = "\n\n\nInformación al día de hoy: " + datetime.now().strftime("%c") + "\n" + ".:|:.:|:. CISCO"
     payload = {"roomId": room_id, "text": message  + cisco}
     requests.post(host+"/messages/", data=json.dumps(payload), headers=headers)
 
@@ -103,10 +102,10 @@ def Answer(message_request, room_id):
                 columnNocturno= 813688526530436
                 response = ss_client.Cells.get_cell_history(sheet_id, row_id, columnRemoto, include_all=True)
                 messageString = "El ingeniero en turno remoto es: " + json.loads(str(response))["data"][0][
-                    'displayValue'+"\n"]
+                    'displayValue']+"\n"
                 response = ss_client.Cells.get_cell_history(sheet_id, row_id, columnNocturno, include_all=True)
                 messageString += "El ingeniero en turno nocturno: " + json.loads(str(response))["data"][0][
-                    'displayValue'+"\n"]
+                    'displayValue']+"\n"
                 sendMessage(messageString, room_id)
             else:
                 ans="Lo siento, no entiendo tu petición\n"+menu()
