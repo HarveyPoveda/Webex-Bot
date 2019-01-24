@@ -94,13 +94,18 @@ def Answer(message_request, room_id):
                 bandera=4
                 sendMessage(messageString, room_id)
             elif "5" in message.lower():
+                week= datetime.now().strftime("%W")
                 ss_client = smartsheet.Smartsheet(authetication_sheet)
-                sheet_id = 6404892530108292
-                columnId = 1522017586440068
-                row_id = 7005051021485956
-                response = ss_client.Cells.get_cell_history(sheet_id, row_id, columnId, include_all=True)
-                # print(json.loads(str(response)))
-                messageString = "El total de requerimientos atendidos es de: " + json.loads(str(response))["data"][0][
+                sheet_id = 6685130556237700
+                response = ss_client.Search.search_sheet(sheet_id, week)
+                row_id = json.loads(str(response))["results"][0]["objectId"]
+                columnRemoto = 8132037921007492
+                columnNocturno= 813688526530436
+                response = ss_client.Cells.get_cell_history(sheet_id, row_id, columnRemoto, include_all=True)
+                messageString = "El ingeniero en turno remoto es: " + json.loads(str(response))["data"][0][
+                    'displayValue']
+                response = ss_client.Cells.get_cell_history(sheet_id, row_id, columnNocturno, include_all=True)
+                messageString += "El ingeniero en turno nocturno: " + json.loads(str(response))["data"][0][
                     'displayValue']
                 sendMessage(messageString, room_id)
             else:
@@ -110,7 +115,8 @@ def Answer(message_request, room_id):
             bandera=0
             ss_client = smartsheet.Smartsheet(authetication_sheet)
             sheet_id = 5067660233860996
-            response = ss_client.Search.search(message)
+            response = ss_client.Search.search_sheet(sheet_id,message)
+            print(json.loads(str(response)))
             row_id=json.loads(str(response))["results"][0]["objectId"]
             #columnId_requerimiento = 8796249076852612 # id de requerimiento
             columnId_id = 8796249076852612
@@ -133,6 +139,8 @@ def Answer(message_request, room_id):
             response = ss_client.Cells.get_cell_history(sheet_id, row_id, columnId_propietario, include_all=True)
             messageString += "Propietario: " + json.loads(str(response))["data"][0]['displayValue'] + "\n"
             messageString+="\nal día de hoy: " +datetime.now().strftime('%c')
+
+
             sendMessage(messageString, room_id)
             #print(result)
 
