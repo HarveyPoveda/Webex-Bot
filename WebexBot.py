@@ -74,7 +74,7 @@ def Answer(message_request, room_id):
                 row_id = 7005051021485956
                 response = ss_client.Cells.get_cell_history(sheet_id, row_id, columnId, include_all=True)
                 # print(json.loads(str(response)))
-                messageString = "El total de requerimientos atendidos es de: " + json.loads(str(response))["data"][0][
+                messageString = "El total de requerimientos en ejecución son: " + json.loads(str(response))["data"][0][
                     'displayValue']
 
                 sendMessage(messageString, room_id)
@@ -85,7 +85,7 @@ def Answer(message_request, room_id):
                 row_id = 7005051021485956
                 response = ss_client.Cells.get_cell_history(sheet_id, row_id, columnId, include_all=True)
                 # print(json.loads(str(response)))
-                messageString = "El total de requerimientos atendidos es de: " + json.loads(str(response))["data"][0][
+                messageString = "El total de requerimientos en planeación son: " + json.loads(str(response))["data"][0][
                     'displayValue']
                 sendMessage(messageString, room_id)
             elif "4" in message.lower():
