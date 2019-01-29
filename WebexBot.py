@@ -93,7 +93,7 @@ def Answer(message_request, room_id):
                 bandera=4
                 sendMessage(messageString, room_id)
             elif "5" in message.lower():
-                week= (datetime.utcnow() +timedelta(hours=-5)).strftime("%W")+1
+                week= float((datetime.utcnow() +timedelta(hours=-5)).strftime("%W"))+1
                 ss_client = smartsheet.Smartsheet(authetication_sheet)
                 sheet_id = 6685130556237700
                 response = ss_client.Search.search_sheet(sheet_id, week)
