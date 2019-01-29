@@ -108,16 +108,16 @@ def Answer(message_request, room_id):
                 messageString += "El ingeniero en turno nocturno es: " + json.loads(str(response))["data"][0][
                     'displayValue']
                 sendMessage(messageString, room_id)
-            elif "prueba" in message.lower():
+            elif "prueba-secret" in message.lower():
                 week = int((datetime.utcnow() + timedelta(hours=-5)).strftime("%W")) + 1
                 ss_client = smartsheet.Smartsheet(authetication_sheet)
                 sheet_id = 6685130556237700
                 pruebaId = 3092366245554052
                 response = ss_client.Search.search_sheet(sheet_id, week)
                 row_id = json.loads(str(response))["results"][0]["objectId"]
-                messageString = "###PRUEBA### " + str(week) + "\n"
+                messageString = "semana " + str(week) + "\n"
                 response = ss_client.Cells.get_cell_history(sheet_id, row_id, pruebaId, include_all=True)
-                messageString += "columna " + json.loads(str(response))["data"][0][
+                messageString += "Valor encontrado " + json.loads(str(response))["data"][0][
                     'displayValue'] + "\n"
 
                 sendMessage(messageString, room_id)
