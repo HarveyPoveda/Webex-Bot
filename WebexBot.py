@@ -93,7 +93,7 @@ def Answer(message_request, room_id):
                 bandera=4
                 sendMessage(messageString, room_id)
             elif "5" in message.lower():
-                week= float((datetime.utcnow() +timedelta(hours=-5)).strftime("%W"))+1
+                week= (datetime.utcnow() +timedelta(hours=-5)).strftime("%W")
                 ss_client = smartsheet.Smartsheet(authetication_sheet)
                 sheet_id = 6685130556237700
                 response = ss_client.Search.search_sheet(sheet_id, week)
@@ -101,7 +101,7 @@ def Answer(message_request, room_id):
                 columnRemoto = 8132037921007492
                 columnNocturno= 813688526530436
                 response = ss_client.Cells.get_cell_history(sheet_id, row_id, columnRemoto, include_all=True)
-                messageString = "La semana es: "  +str(week)+ "\n"
+                messageString = "La semana es: "  + type(week)+ "\n"
                 messageString += "El ingeniero en turno remoto es: " + json.loads(str(response))["data"][0][
                     'displayValue']+"\n"
                 response = ss_client.Cells.get_cell_history(sheet_id, row_id, columnNocturno, include_all=True)
