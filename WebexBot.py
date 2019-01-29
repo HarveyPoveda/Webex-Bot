@@ -108,7 +108,7 @@ def Answer(message_request, room_id):
                 messageString += "El ingeniero en turno nocturno es: " + json.loads(str(response))["data"][0][
                     'displayValue']
                 sendMessage(messageString, room_id)
-            elif "prueba-secret" in message.lower():
+            elif message.lower()=="prueba-secret":
                 week = int((datetime.utcnow() + timedelta(hours=-5)).strftime("%W")) + 1
                 ss_client = smartsheet.Smartsheet(authetication_sheet)
                 sheet_id = 6685130556237700
