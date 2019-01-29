@@ -101,7 +101,7 @@ def Answer(message_request, room_id):
                 columnRemoto = 8132037921007492
                 columnNocturno= 813688526530436
                 response = ss_client.Cells.get_cell_history(sheet_id, row_id, columnRemoto, include_all=True)
-                messageString = "Semana del año numero "  + str(week)+ "\n"
+                messageString = "Semana del año número "  + str(week)+ "\n"
                 messageString += "El ingeniero en turno remoto es: " + json.loads(str(response))["data"][0][
                     'displayValue']+"\n"
                 response = ss_client.Cells.get_cell_history(sheet_id, row_id, columnNocturno, include_all=True)
