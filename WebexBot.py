@@ -103,7 +103,7 @@ def Answer(message_request, room_id):
                 for rowssheet in resjson["rows"]:
                     flag=0
                     for cell_rows in rowssheet["cells"]:
-                        if cell_rows["columnId"]==columnSemana and cell_rows["value"]==week and rowssheet["value"]:
+                        if cell_rows["columnId"]==columnSemana and cell_rows["value"]==week:
                             flag=1
                         if flag==1 and cell_rows["columnId"]==columnDias and 0<cell_rows["value"]<7:
                             row_id = rowssheet["id"]
