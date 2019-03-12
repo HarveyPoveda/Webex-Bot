@@ -49,7 +49,7 @@ def Answer(message_request, room_id):
         if bandera==0:
             whois = requests.get(host + "/people?email=" + WhoisEmail, headers=headers)
             WhoisName_json = json.loads(whois.text)
-            print(WhoisName_json)
+            print("quien esta enviando la info:\n"+WhoisName_json)
             WhoisName = WhoisName_json["items"][0]["firstName"]
             if 'hola' in message.lower():
                 ans = "Hola "+WhoisName+"!\n" + menu()
@@ -97,13 +97,17 @@ def Answer(message_request, room_id):
                 ##### for para buscar semana
                 sheet_id = 6685130556237700
                 columnSemana = 3092366245554052
+                columnDias = 3065488340215684
                 response = ss_client.Sheets.get_sheet(sheet_id)
                 resjson=json.loads(str(response))
                 for rowssheet in resjson["rows"]:
+                    flag=0
                     for cell_rows in rowssheet["cells"]:
-                        if cell_rows["columnId"]==columnSemana and cell_rows["value"]==week:
+                        if cell_rows["columnId"]==columnSemana and cell_rows["value"]==week and rowssheet["value"]:
+                            flag=1
+                        if flag==1 and cell_rows["columnId"]==columnDias and 0<cell_rows["value"]<7:
                             row_id = rowssheet["id"]
-                            print(cell_rows["value"])
+                            print("semana encontrada: "+cell_rows["value"],"dias :"+cell_rows["value"],sep="\n")
 
                 # response = ss_client.Search.search_sheet(sheet_id, week)
                 # row_id = json.loads(str(response))["results"][0]["objectId"]
