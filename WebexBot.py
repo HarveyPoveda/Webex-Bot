@@ -49,7 +49,7 @@ def Answer(message_request, room_id):
         if bandera==0:
             whois = requests.get(host + "/people?email=" + WhoisEmail, headers=headers)
             WhoisName_json = json.loads(whois.text)
-            print("quien esta enviando la info:\n"+WhoisName_json)
+            print("quien esta enviando la info:\n"+str(WhoisName_json))
             WhoisName = WhoisName_json["items"][0]["firstName"]
             if 'hola' in message.lower():
                 ans = "Hola "+WhoisName+"!\n" + menu()
