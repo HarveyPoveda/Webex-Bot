@@ -107,7 +107,7 @@ def Answer(message_request, room_id):
                             flag=1
                         if flag==1 and cell_rows["columnId"]==columnDias and 0<cell_rows["value"]<7:
                             row_id = rowssheet["id"]
-                            print("semana encontrada: "+cell_rows["value"],"dias :"+cell_rows["value"],sep="\n")
+                            print("semana encontrada: "+str(cell_rows["value"]),"dias :"+str(cell_rows["value"]),sep="\n")
 
                 # response = ss_client.Search.search_sheet(sheet_id, week)
                 # row_id = json.loads(str(response))["results"][0]["objectId"]
