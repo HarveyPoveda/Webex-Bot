@@ -7,7 +7,6 @@ import requests
 import json
 import smartsheet
 from datetime import datetime,timedelta
-import pprint
 import os
 
 
@@ -95,9 +94,19 @@ def Answer(message_request, room_id):
             elif "5" in message.lower():
                 week= int((datetime.utcnow() +timedelta(hours=-5)).strftime("%W"))+1
                 ss_client = smartsheet.Smartsheet(authetication_sheet)
+                ##### for para buscar semana
                 sheet_id = 6685130556237700
-                response = ss_client.Search.search_sheet(sheet_id, week)
-                row_id = json.loads(str(response))["results"][0]["objectId"]
+                columnSemana = 3092366245554052
+                response = ss_client.Sheets.get_sheet(sheet_id)
+                resjson=json.loads(str(response))
+                for rowssheet in resjson["rows"]:
+                    for cell_rows in rowssheet["cells"]:
+                        if cell_rows["columnId"]==columnSemana and cell_rows["value"]==week:
+                            row_id = rowssheet["id"]
+                            print(cell_rows["value"])
+
+                # response = ss_client.Search.search_sheet(sheet_id, week)
+                # row_id = json.loads(str(response))["results"][0]["objectId"]
                 columnRemoto = 8132037921007492
                 columnNocturno= 813688526530436
                 messageString = "Semana del año número " + str(week) + "\n"
