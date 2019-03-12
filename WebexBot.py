@@ -106,7 +106,7 @@ def Answer(message_request, room_id):
                         if cell_rows["columnId"]==columnSemana and cell_rows["value"]==week:
                             flag=1
                             semana=str(cell_rows["value"])
-                        if flag==1 and cell_rows["columnId"]==columnDias and 0<cell_rows["value"]<7:
+                        if flag==1 and cell_rows["columnId"]==columnDias and -2<=cell_rows["value"]<=4:
                             row_id = rowssheet["id"]
                             print("semana encontrada: "+semana,"dias :"+str(cell_rows["value"]),sep="\n")
 
